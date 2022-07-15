@@ -1,5 +1,6 @@
 <script>
 import WFForecastForm from '@/components/WFForecastForm.vue';
+import { mapActions } from 'vuex';
 
 export default {
   name: 'WFStepper',
@@ -7,7 +8,23 @@ export default {
   data() {
     return {
       currentStep: 1,
+      forecastData: null,
     };
+  },
+  methods: {
+    ...mapActions(['fetchCityWeather', 'fetchCityInfoByName']),
+    getForm(form) {
+      this.fetchCityInfoByName(form.city)
+        .then((res) => {
+          console.log({ res });
+          const [cityData] = res.data;
+
+          this.fetchCityWeather(cityData)
+            .then((forecast) => {
+              this.forecastData = forecast.data;
+            });
+        });
+    },
   },
 };
 </script>
@@ -35,21 +52,22 @@ export default {
 
       <v-stepper-items>
         <v-stepper-content step="1">
-          <wF-forecast-form/>
+          <wF-forecast-form
+            @setForm="getForm"
+          />
         </v-stepper-content>
 
         <v-stepper-content step="2">
           <v-card
             class="mb-12"
+            height="100%"
           >
             selfie section
           </v-card>
         </v-stepper-content>
 
         <v-stepper-content step="3">
-          <v-card
-            class="mb-12"
-          ></v-card>
+          data
         </v-stepper-content>
       </v-stepper-items>
 
