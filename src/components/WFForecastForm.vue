@@ -29,7 +29,7 @@ export default {
     </v-layout>
 
     <v-layout justify-end>
-      <v-btn>
+      <v-btn @click="$emit('setForm', formData)">
         Next
       </v-btn>
     </v-layout>
