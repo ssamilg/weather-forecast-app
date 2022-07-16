@@ -1,10 +1,11 @@
 <script>
 import WFForecastForm from '@/components/WFForecastForm.vue';
+import WFForecastTable from '@/components/WFForecastTable.vue';
 import { mapActions } from 'vuex';
 
 export default {
   name: 'WFStepper',
-  components: { WFForecastForm },
+  components: { WFForecastForm, WFForecastTable },
   data() {
     return {
       currentStep: 1,
@@ -22,6 +23,7 @@ export default {
           this.fetchCityWeather(cityData)
             .then((forecast) => {
               this.forecastData = forecast.data;
+              this.currentStep = 2;
             });
         });
     },
@@ -67,7 +69,7 @@ export default {
         </v-stepper-content>
 
         <v-stepper-content step="3">
-          data
+          <wF-forecast-table v-if="forecastData" :forecast-data="forecastData"/>
         </v-stepper-content>
       </v-stepper-items>
 
