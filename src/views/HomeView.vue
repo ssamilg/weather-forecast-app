@@ -11,7 +11,7 @@ export default {
   <div>
     <v-container>
       <v-layout align-center justify-center>
-        <v-flex md4>
+        <v-flex md6>
           <wF-stepper/>
         </v-flex>
       </v-layout>
