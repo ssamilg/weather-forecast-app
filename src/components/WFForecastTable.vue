@@ -87,10 +87,12 @@ export default {
             </v-flex>
           </v-layout>
 
-          <v-layout align-center justify-end mt-2>
-            <v-flex xs8>
+          <v-layout wrap align-center justify-end mt-2>
+            <v-flex xs12 md8>
               <v-layout justify-center class="city-label">
-                {{ forecastData.city.name }}
+                <v-flex class="text-truncate">
+                  {{ forecastData.city.name }}
+                </v-flex>
               </v-layout>
 
               <v-layout justify-center>
@@ -99,7 +101,7 @@ export default {
               </v-layout>
             </v-flex>
 
-            <v-flex xs4>
+            <v-flex xs12 md4>
               <v-layout justify-center class="temperature-label">
                 {{ Math.floor(weather.main.temp) }}°
               </v-layout>
