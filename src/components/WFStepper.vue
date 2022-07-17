@@ -75,7 +75,7 @@ export default {
 
         <v-stepper-content step="3">
           <wF-forecast-table
-            v-if="forecastData"
+            v-if="forecastData && currentStep === 3"
             :forecast-data="forecastData"
             :user-data="userData"
           />
