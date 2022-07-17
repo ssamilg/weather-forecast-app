@@ -1,9 +1,10 @@
 <script>
 import WFTodaysWeatherSection from './WFTodaysWeatherSection.vue';
+import WFCurrentWeatherSection from './WFCurrentWeatherSection.vue';
 
 export default {
   name: 'WFForecastTable',
-  components: { WFTodaysWeatherSection },
+  components: { WFTodaysWeatherSection, WFCurrentWeatherSection },
   props: {
     userData: {
       type: Object,
@@ -61,63 +62,17 @@ export default {
 <template>
   <div id="wf-forecast-table">
     <template v-if="forecastData.cod">
-      <v-layout v-if="weather">
-        <v-flex xs4 align-self-center>
-          <v-img
-            src="https://avatars.githubusercontent.com/u/24295210?v=4"
-          />
-            <!-- height="100%" -->
-          <!-- <v-icon>mdi-weather-cloudy</v-icon> -->
-          <!-- {{ weather }} -->
-        </v-flex>
-
-        <v-flex xs8>
-          <v-layout align-center justify-center>
-            <v-flex shrink class="name-label font-weight-medium">
-              Weather for
-              {{ userData.name }}
-            </v-flex>
-
-            <v-flex shrink>
-              <v-img
-                :src="`http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`"
-                height="40"
-                width="40"
-              />
-            </v-flex>
-          </v-layout>
-
-          <v-layout wrap align-center justify-end mt-2>
-            <v-flex xs12 md8>
-              <v-layout justify-center class="city-label">
-                <v-flex class="text-truncate">
-                  {{ forecastData.city.name }}
-                </v-flex>
-              </v-layout>
-
-              <v-layout justify-center>
-                {{ forecastData.city.country }},
-                {{ weather.today.slice(-5) }}
-              </v-layout>
-            </v-flex>
-
-            <v-flex xs12 md4>
-              <v-layout justify-center class="temperature-label">
-                {{ Math.floor(weather.main.temp) }}°
-              </v-layout>
-
-              <v-layout justify-center>
-                {{ weather.weather[0].description }}
-              </v-layout>
-            </v-flex>
-          </v-layout>
-        </v-flex>
-      </v-layout>
+      <wF-current-weather-section
+        v-if="weather"
+        :user-data="userData"
+        :current-weather="weather"
+        :forecast-data="{ city: forecastData.city }"
+      />
 
       <template v-if="processedForecastData">
         <v-layout class="weather-table-container">
           <v-flex>
-            <WFTodaysWeatherSection
+            <wF-todays-weather-section
               v-if="todaysForecastData"
               :current-weather="weather"
               :todays-forecast="todaysForecastData"
