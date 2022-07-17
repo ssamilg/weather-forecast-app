@@ -13,35 +13,43 @@ export default {
   },
   data() {
     return {
+      days: [],
       weather: null,
+      todaysForecastData: null,
+      processedForecastData: null,
     };
   },
   mounted() {
     console.log('forecastData', this.forecastData);
     console.log('userData', this.userData);
-    // console.log(this.filterToday());
+
     [this.weather] = this.forecastData.list;
     this.weather.today = new Date(this.weather.dt_txt).toString().slice(0, 21);
-    this.processWeatherData();
+
+    this.todaysForecastData = this.filterForecastByDate(this.weather.dt_txt);
+    this.processedForecastData = this.processForecastData();
   },
   methods: {
-    filterToday() {
-      const today = new Date().toISOString().slice(0, 10);
-      console.log(today);
-
-      const todaysWeather = this.forecastData.list.filter((i) => i.dt_txt.slice(0, 10) === today);
-      return todaysWeather;
+    filterForecastByDate(date) {
+      return this.forecastData.list.filter((i) => i.dt_txt.slice(0, 10) === date.slice(0, 10));
     },
-    processWeatherData() {
-      const days = [];
+    processForecastData() {
+      const processedData = {};
 
       this.forecastData.list.forEach((element, index) => {
         if ((index + 1) % 8 === 0) {
-          days.push(element);
+          this.days.push(element.dt_txt.slice(0, 10));
         }
       });
 
-      console.log(days);
+      this.days.forEach((date) => {
+        processedData[date] = this.filterForecastByDate(date);
+      });
+
+      console.log(this.days);
+      console.log(processedData);
+
+      return processedData;
     },
   },
 };
@@ -50,7 +58,7 @@ export default {
 <template>
   <div id="wf-forecast-table">
     <template v-if="forecastData.cod">
-      <v-layout>
+      <v-layout v-if="weather">
         <v-flex xs4>
           <v-img
             src="https://avatars.githubusercontent.com/u/24295210?v=4"
@@ -67,15 +75,16 @@ export default {
             </v-flex>
           </v-layout>
 
-          <v-layout align-center justify-end>
+          <v-layout align-center justify-end mt-2>
             <v-flex xs8>
               <v-layout justify-center class="city-label">
                 {{ forecastData.city.name }}
               </v-layout>
 
-              <!-- <v-layout justify-center>
-                {{ forecastData.city.country }}
-              </v-layout> -->
+              <v-layout justify-center>
+                {{ forecastData.city.country }},
+                {{ weather.today.slice(-5) }}
+              </v-layout>
             </v-flex>
 
             <v-flex xs4>
@@ -88,15 +97,62 @@ export default {
               </v-layout>
             </v-flex>
           </v-layout>
-
         </v-flex>
       </v-layout>
 
-      <v-layout align-center justify-center>
-        <v-flex shrink class="text-truncate date-label">
-          {{ weather.today }}
-        </v-flex>
-      </v-layout>
+      <template v-if="processedForecastData">
+        <v-layout align-center mt-2>
+          <v-flex shrink class="text-truncate date-label">
+            {{ weather.today.slice(0, 15) }}
+          </v-flex>
+        </v-layout>
+
+        <v-layout class="todays-weather">
+          <v-flex
+            v-for="todaysWeather in todaysForecastData"
+            :key="todaysWeather.dt_txt"
+          >
+            <v-layout>
+              <v-flex>
+                {{ new Date(todaysWeather.dt_txt).getHours().toString().padStart(2, '0') }}
+              </v-flex>
+            </v-layout>
+
+            <v-layout>
+              <v-flex >
+                <v-icon>mdi-weather-cloudy</v-icon>
+              </v-flex>
+            </v-layout>
+
+            <v-layout class="todays-weather-temperature">
+              <v-flex >
+                {{  Math.floor(todaysWeather.main.temp) }}
+              </v-flex>
+            </v-layout>
+          </v-flex>
+        </v-layout>
+
+        <template v-if="false">
+          <v-layout
+            v-for="(day, index) in days"
+            :key="index"
+          >
+            <v-flex>
+              {{ new Date(day).toString().slice(0, 10) }}
+            </v-flex>
+            <template v-for="weatherForDay in processedForecastData[day]">
+          <!-- v-if="`${day} ${weather.dt_txt.slice(-8)}` === weatherForDay.dt_txt" -->
+          <!-- {{ new Date(weatherForDay.dt_txt).toString().slice(0, 21).replace('2022', '') }} -->
+              <v-flex
+                :key="weatherForDay.dt_txt"
+                pa-1
+              >
+                {{ weatherForDay.main.temp }}
+              </v-flex>
+            </template>
+          </v-layout>
+        </template>
+      </template>
     </template>
 
     <template v-else>
@@ -120,7 +176,7 @@ export default {
   .date-label {
     text-align: center;
     font-size: 1rem;
-    // font-weight: 500;
+    font-weight: 500;
   }
 
   .temperature-label {
@@ -128,6 +184,18 @@ export default {
     font-size: 1.8rem;
     text-transform: uppercase;
     font-weight: 500;
+  }
+
+  .todays-weather {
+    text-align: center;
+
+    &-hours {
+    }
+
+    &-temperature {
+      font-weight: 500;
+      font-size: 1.5rem;
+    }
   }
 }
 </style>
