@@ -1,6 +1,9 @@
 <script>
+import WFTodaysWeatherSection from './WFTodaysWeatherSection.vue';
+
 export default {
   name: 'WFForecastTable',
+  components: { WFTodaysWeatherSection },
   props: {
     userData: {
       type: Object,
@@ -59,10 +62,11 @@ export default {
   <div id="wf-forecast-table">
     <template v-if="forecastData.cod">
       <v-layout v-if="weather">
-        <v-flex xs4>
+        <v-flex xs4 align-self-center>
           <v-img
             src="https://avatars.githubusercontent.com/u/24295210?v=4"
           />
+            <!-- height="100%" -->
           <!-- <v-icon>mdi-weather-cloudy</v-icon> -->
           <!-- {{ weather }} -->
         </v-flex>
@@ -72,6 +76,14 @@ export default {
             <v-flex shrink class="name-label font-weight-medium">
               Weather for
               {{ userData.name }}
+            </v-flex>
+
+            <v-flex shrink>
+              <v-img
+                :src="`http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`"
+                height="40"
+                width="40"
+              />
             </v-flex>
           </v-layout>
 
@@ -89,7 +101,7 @@ export default {
 
             <v-flex xs4>
               <v-layout justify-center class="temperature-label">
-                {{ Math.floor(weather.main.temp) }}
+                {{ Math.floor(weather.main.temp) }}°
               </v-layout>
 
               <v-layout justify-center>
@@ -101,57 +113,36 @@ export default {
       </v-layout>
 
       <template v-if="processedForecastData">
-        <v-layout align-center mt-2>
-          <v-flex shrink class="text-truncate date-label">
-            {{ weather.today.slice(0, 15) }}
-          </v-flex>
-        </v-layout>
+        <v-layout class="weather-table-container">
+          <v-flex>
+            <WFTodaysWeatherSection
+              v-if="todaysForecastData"
+              :current-weather="weather"
+              :todays-forecast="todaysForecastData"
+            />
 
-        <v-layout class="todays-weather">
-          <v-flex
-            v-for="todaysWeather in todaysForecastData"
-            :key="todaysWeather.dt_txt"
-          >
-            <v-layout>
-              <v-flex>
-                {{ new Date(todaysWeather.dt_txt).getHours().toString().padStart(2, '0') }}
-              </v-flex>
-            </v-layout>
-
-            <v-layout>
-              <v-flex >
-                <v-icon>mdi-weather-cloudy</v-icon>
-              </v-flex>
-            </v-layout>
-
-            <v-layout class="todays-weather-temperature">
-              <v-flex >
-                {{  Math.floor(todaysWeather.main.temp) }}
-              </v-flex>
-            </v-layout>
-          </v-flex>
-        </v-layout>
-
-        <template v-if="false">
-          <v-layout
-            v-for="(day, index) in days"
-            :key="index"
-          >
-            <v-flex>
-              {{ new Date(day).toString().slice(0, 10) }}
-            </v-flex>
-            <template v-for="weatherForDay in processedForecastData[day]">
+            <template v-if="false">
+              <v-layout
+                v-for="(day, index) in days"
+                :key="index"
+              >
+                <v-flex>
+                  {{ new Date(day).toString().slice(0, 10) }}
+                </v-flex>
+                <template v-for="weatherForDay in processedForecastData[day]">
           <!-- v-if="`${day} ${weather.dt_txt.slice(-8)}` === weatherForDay.dt_txt" -->
           <!-- {{ new Date(weatherForDay.dt_txt).toString().slice(0, 21).replace('2022', '') }} -->
-              <v-flex
-                :key="weatherForDay.dt_txt"
-                pa-1
-              >
-                {{ weatherForDay.main.temp }}
-              </v-flex>
+                  <v-flex
+                    :key="weatherForDay.dt_txt"
+                    pa-1
+                  >
+                    {{ weatherForDay.main.temp }}
+                  </v-flex>
+                </template>
+              </v-layout>
             </template>
-          </v-layout>
-        </template>
+          </v-flex>
+        </v-layout>
       </template>
     </template>
 
@@ -164,7 +155,8 @@ export default {
 <style lang="scss">
 #wf-forecast-table {
   height: 100%;
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
 
   .city-label {
     text-align: center;
@@ -186,16 +178,8 @@ export default {
     font-weight: 500;
   }
 
-  .todays-weather {
-    text-align: center;
-
-    &-hours {
-    }
-
-    &-temperature {
-      font-weight: 500;
-      font-size: 1.5rem;
-    }
+  .weather-table-container {
+    // height: fill;
   }
 }
 </style>
