@@ -39,6 +39,7 @@ export default {
   <div id="wf-stepper">
     <v-stepper v-model="currentStep">
       <v-stepper-header>
+        <!-- TODO Remove steps and add logolike text here also shrink the height -->
         <v-stepper-step
           :complete="currentStep > 1"
           step="1"
