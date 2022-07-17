@@ -10,11 +10,15 @@ export default {
     return {
       currentStep: 1,
       forecastData: null,
+      userData: null,
     };
   },
   methods: {
     ...mapActions(['fetchCityWeather', 'fetchCityInfoByName']),
     getForm(form) {
+      // TODO put nullcheck for form in here
+      this.userData = { ...form };
+
       this.fetchCityInfoByName(form.city)
         .then((res) => {
           console.log({ res });
@@ -69,7 +73,11 @@ export default {
         </v-stepper-content>
 
         <v-stepper-content step="3">
-          <wF-forecast-table v-if="forecastData" :forecast-data="forecastData"/>
+          <wF-forecast-table
+            v-if="forecastData"
+            :forecast-data="forecastData"
+            :user-data="userData"
+          />
         </v-stepper-content>
       </v-stepper-items>
 
