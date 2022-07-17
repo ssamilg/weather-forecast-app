@@ -17,6 +17,7 @@ export default {
 <style lang="scss">
 ::-webkit-scrollbar {
   width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
