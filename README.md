@@ -11,6 +11,16 @@ You can see live preview here: [Weather Forecast App](https://ssg-weather-app.ne
 * Projects name is Weather Forecast App, hence I have used 'WF' prefix for the custom components that I've created.
 * In custom components style section, there is a wrapper div and an id given to this div as wrapper css. I use this method for overwriting Vuetify classes without scoping.
 
+## Components
+* WFCurrentWeatherSection
+    UI section that shows current time's weather data.
+    Props
+    | Name           | Type  | Description |
+    |----------------|-------|-------------|
+    | currentWeather |Object | First item of the weather data fetched from the api. Indicates weather report closest to current time|
+    | forecastData   |Object | Processed and grouped version of api's forecast data|
+
+
 ## Future Development Ideas
 * An AI face detection plugin could be implemented to detect user faces while taking selfies inside app.
 * App is only showing weather degrees right now, API has a lot of different data (humidity, wind etc.). These datas can be shown in a detailed view.
