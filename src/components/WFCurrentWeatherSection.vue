@@ -1,4 +1,6 @@
 <script>
+import { mapState } from 'vuex';
+
 export default {
   name: 'WFCurrentWeatherSection',
   props: {
@@ -21,6 +23,9 @@ export default {
       weather: null,
     };
   },
+  computed: {
+    ...mapState(['imgURL']),
+  },
   mounted() {
     this.weather = this.currentWeather;
   },
@@ -32,7 +37,7 @@ export default {
       <v-layout v-if="weather">
         <v-flex xs4 align-self-center>
           <v-img
-            src="https://avatars.githubusercontent.com/u/24295210?v=4"
+            :src="imgURL"
           />
             <!-- height="100%" -->
         </v-flex>
