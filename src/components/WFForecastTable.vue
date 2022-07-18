@@ -6,10 +6,6 @@ export default {
   name: 'WFForecastTable',
   components: { WFTodaysWeatherSection, WFCurrentWeatherSection },
   props: {
-    userData: {
-      type: Object,
-      required: true,
-    },
     forecastData: {
       type: Object,
       required: true,
@@ -25,7 +21,6 @@ export default {
   },
   mounted() {
     console.log('forecastData', this.forecastData);
-    console.log('userData', this.userData);
 
     [this.weather] = this.forecastData.list;
     this.weather.today = new Date(this.weather.dt_txt).toString().slice(0, 21);
@@ -64,7 +59,6 @@ export default {
     <template v-if="forecastData.cod">
       <wF-current-weather-section
         v-if="weather"
-        :user-data="userData"
         :current-weather="weather"
         :forecast-data="{ city: forecastData.city }"
       />

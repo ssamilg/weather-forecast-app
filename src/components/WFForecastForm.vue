@@ -1,4 +1,6 @@
 <script>
+import { mapActions } from 'vuex';
+
 export default {
   name: 'WFForecastForm',
   data() {
@@ -8,6 +10,15 @@ export default {
         city: null,
       },
     };
+  },
+  methods: {
+    ...mapActions(['setUserName', 'setUserCity']),
+    setUserData() {
+      this.setUserName(this.formData.name);
+      this.setUserCity(this.formData.city);
+
+      this.$emit('setForm', this.formData);
+    },
   },
 };
 </script>
@@ -29,7 +40,7 @@ export default {
     </v-layout>
 
     <v-layout justify-end>
-      <v-btn @click="$emit('setForm', formData)">
+      <v-btn @click="setUserData()">
         Next
       </v-btn>
     </v-layout>

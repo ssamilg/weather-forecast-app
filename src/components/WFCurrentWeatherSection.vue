@@ -8,11 +8,6 @@ export default {
       type: Object,
       required: true,
     },
-    // TODO move this user data to state
-    userData: {
-      type: Object,
-      required: true,
-    },
     forecastData: {
       type: Object,
       required: true,
@@ -24,7 +19,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(['imgURL']),
+    ...mapState(['imgURL', 'userName']),
   },
   mounted() {
     this.weather = this.currentWeather;
@@ -46,7 +41,7 @@ export default {
           <v-layout align-center justify-center>
             <v-flex shrink class="name-label font-weight-medium">
               Weather for
-              {{ userData.name }}
+              {{ userName }}
             </v-flex>
 
             <v-flex shrink>
