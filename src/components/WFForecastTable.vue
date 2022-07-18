@@ -146,9 +146,5 @@ export default {
     text-transform: uppercase;
     font-weight: 500;
   }
-
-  .weather-table-container {
-    // height: fill;
-  }
 }
 </style>

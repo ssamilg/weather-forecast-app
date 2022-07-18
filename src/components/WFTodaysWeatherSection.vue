@@ -82,23 +82,10 @@ export default {
 
     .todays-weather {
       text-align: center;
-      border: 1px solid rgba($color: #000000, $alpha: 0);
-
-      &:hover {
-        border: 1px solid #e0e0e0;
-        cursor: default;
-      }
-
-      &-hours {
-      }
 
       &-temperature {
         font-weight: 300;
         font-size: 1rem;
-      }
-
-      &-icons {
-        // background-color: #80CBC4
       }
     }
   }
