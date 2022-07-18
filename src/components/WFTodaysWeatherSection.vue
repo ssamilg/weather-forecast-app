@@ -26,7 +26,7 @@ export default {
 <template>
   <div id="wF-todays-weather-section">
     <v-layout align-center mt-4>
-      <v-flex shrink class="text-truncate date-label">
+      <v-flex shrink class="text-truncate font-weight-bold date-label">
         {{ currentWeather.today.slice(0, 15) }}
       </v-flex>
     </v-layout>

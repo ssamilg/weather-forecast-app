@@ -83,7 +83,7 @@ export default {
     </template>
 
     <template v-else>
-      No data damn
+      No data !
     </template>
   </div>
 </template>
