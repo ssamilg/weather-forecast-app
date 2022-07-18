@@ -58,7 +58,7 @@ You can see live preview here: [Weather Forecast App](https://ssg-weather-app.ne
 
 * **WFWeeklyWeatherSection**
 
-    UI section that shows today's weather data with 3 hours of intervals.
+    UI section that shows 5 days of weather forecast report starting tomorrow for every day with 3 hours of intervals.
 
     Props
 
