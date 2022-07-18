@@ -11,14 +11,6 @@ export default {
       required: true,
     },
   },
-  data() {
-    return {
-    };
-  },
-  mounted() {
-  },
-  methods: {
-  },
 };
 </script>
 
