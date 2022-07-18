@@ -13,8 +13,11 @@ You can see live preview here: [Weather Forecast App](https://ssg-weather-app.ne
 
 ## Components
 * WFCurrentWeatherSection
+
     UI section that shows current time's weather data.
+
     Props
+
     | Name           | Type  | Description |
     |----------------|-------|-------------|
     | currentWeather |Object | First item of the weather data fetched from the api. Indicates weather report closest to current time|
