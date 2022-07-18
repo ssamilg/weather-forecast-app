@@ -30,6 +30,7 @@ export default {
 
 <template>
   <div id="wf-forecast-form">
+    <!-- TODO add a welcome message here -->
     <v-layout>
       <v-text-field
         v-model="formData.name"
