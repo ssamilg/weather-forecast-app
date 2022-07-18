@@ -30,6 +30,7 @@ export default {
           this.video.play();
         })
         .catch((err) => {
+          // TODO proper error handling should be added here
           console.log(err);
         });
     },
