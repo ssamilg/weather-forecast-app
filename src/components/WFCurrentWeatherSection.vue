@@ -33,9 +33,8 @@ export default {
         <v-flex xs4 align-self-center>
           <v-img
             :src="imgURL"
+            class="user-image"
           />
-          <!-- TODO image style update avatar component maybe ? -->
-            <!-- height="100%" -->
         </v-flex>
 
         <v-flex xs8>
@@ -85,6 +84,8 @@ export default {
 
 <style lang="scss">
 #wf-current-weather-section {
-
+  .user-image {
+    border-radius: 12px;
+  }
 }
 </style>
