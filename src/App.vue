@@ -1,10 +1,9 @@
 <script>
 export default {
   name: 'App',
-
-  data: () => ({
-    //
-  }),
+  mounted() {
+    this.$router.push('/');
+  },
 };
 </script>
 
