@@ -9,6 +9,7 @@ export default {
   components: { WFForecastForm, WFForecastTable, WFSelfieStep },
   data() {
     return {
+      isLoading: false,
       currentStep: 1,
       forecastData: null,
       snackbar: {
@@ -21,6 +22,8 @@ export default {
   methods: {
     ...mapActions(['fetchCityWeather', 'fetchCityInfoByName']),
     getForm(form) {
+      this.isLoading = true;
+
       this.fetchCityInfoByName(form.city)
         .then((res) => {
           console.log({ res });
@@ -36,6 +39,9 @@ export default {
             })
             .catch((err) => {
               this.showSnackbar('error', err);
+            })
+            .finally(() => {
+              this.isLoading = false;
             });
         })
         .catch((err) => {
@@ -76,9 +82,24 @@ export default {
       <v-stepper-items>
         <v-stepper-content step="1">
           <wF-forecast-form
+            v-if="!isLoading"
             @setForm="getForm"
             @showWarning="showSnackbar($event.type, $event.text)"
           />
+
+          <v-layout
+            v-else-if="isLoading"
+            align-center justify-center fill-height
+          >
+            <v-flex shrink>
+              <v-progress-circular
+                :size="70"
+                :width="7"
+                color="primary"
+                indeterminate
+              />
+            </v-flex>
+          </v-layout>
         </v-stepper-content>
 
         <v-stepper-content step="2">
