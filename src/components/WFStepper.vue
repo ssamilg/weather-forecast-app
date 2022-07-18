@@ -26,7 +26,6 @@ export default {
 
       this.fetchCityInfoByName(form.city)
         .then((res) => {
-          console.log({ res });
           const [cityData] = res.data;
 
           this.fetchCityWeather(cityData)
