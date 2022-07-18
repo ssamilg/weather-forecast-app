@@ -1,11 +1,12 @@
 <script>
 import WFForecastForm from '@/components/WFForecastForm.vue';
 import WFForecastTable from '@/components/WFForecastTable.vue';
+import WFSelfieStep from '@/components/WFSelfieStep.vue';
 import { mapActions } from 'vuex';
 
 export default {
   name: 'WFStepper',
-  components: { WFForecastForm, WFForecastTable },
+  components: { WFForecastForm, WFForecastTable, WFSelfieStep },
   data() {
     return {
       currentStep: 1,
@@ -69,7 +70,7 @@ export default {
             class="mb-12"
             height="100%"
           >
-            selfie section
+            <wF-selfie-step @next-step="currentStep=3"/>
           </v-card>
         </v-stepper-content>
 
