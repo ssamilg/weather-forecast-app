@@ -45,7 +45,7 @@ export default {
           </v-flex>
         </v-layout>
 
-        <v-layout justify-center class="todays-weather-icons">
+        <v-layout justify-center>
           <v-flex shrink>
             <v-img
               :src="`http://openweathermap.org/img/wn/${todaysWeather.weather[0].icon}@2x.png`"
