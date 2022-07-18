@@ -16,8 +16,13 @@ export default {
     setUserData() {
       this.setUserName(this.formData.name);
       this.setUserCity(this.formData.city);
-      // Fields should be filled here before continue
-      this.$emit('setForm', this.formData);
+
+      if (this.formData.name !== null && this.formData.name !== ''
+      && this.formData.city !== '' && this.formData.city !== null) {
+        this.$emit('setForm', this.formData);
+      } else {
+        this.$emit('showWarning', { type: 'warning', text: 'Please fill the fields correctly !' });
+      }
     },
   },
 };

@@ -11,15 +11,16 @@ export default {
     return {
       currentStep: 1,
       forecastData: null,
-      userData: null,
+      snackbar: {
+        isVisible: false,
+        text: '',
+        type: 'info',
+      },
     };
   },
   methods: {
     ...mapActions(['fetchCityWeather', 'fetchCityInfoByName']),
     getForm(form) {
-      // TODO put nullcheck for form in here
-      this.userData = { ...form };
-
       this.fetchCityInfoByName(form.city)
         .then((res) => {
           console.log({ res });
@@ -30,8 +31,21 @@ export default {
             .then((forecast) => {
               this.forecastData = forecast.data;
               this.currentStep = 2;
+
+              this.showSnackbar('success');
+            })
+            .catch((err) => {
+              this.showSnackbar('error', err);
             });
+        })
+        .catch((err) => {
+          this.showSnackbar('error', err.message);
         });
+    },
+    showSnackbar(type, text = null) {
+      this.snackbar.isVisible = true;
+      this.snackbar.type = type;
+      this.snackbar.text = text || 'Successfull';
     },
   },
 };
@@ -63,13 +77,16 @@ export default {
         <v-stepper-content step="1">
           <wF-forecast-form
             @setForm="getForm"
+            @showWarning="showSnackbar($event.type, $event.text)"
           />
         </v-stepper-content>
 
         <v-stepper-content step="2">
           <wF-selfie-step
-            @next-step="currentStep=3"
-            @prev-step="currentStep=1"
+            v-if="currentStep === 2"
+            @nextStep="currentStep=3"
+            @prevStep="currentStep=1"
+            @showError="showSnackbar($event.type, $event.text)"
           />
         </v-stepper-content>
 
@@ -92,10 +109,26 @@ export default {
             </v-btn>
           </v-layout>
         </v-stepper-content>
-
       </v-stepper-items>
-
     </v-stepper>
+
+    <v-snackbar
+      v-model="snackbar.isVisible"
+      :timeout="2000"
+      :color="snackbar.type"
+    >
+      {{ snackbar.text }}
+
+      <template v-slot:action="{ attrs }">
+        <v-btn
+          icon
+          v-bind="attrs"
+          @click="snackbar.isVisible = false"
+        >
+          <v-icon>mdi-close</v-icon>
+        </v-btn>
+      </template>
+    </v-snackbar>
   </div>
 </template>
 
