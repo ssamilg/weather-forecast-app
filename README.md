@@ -11,6 +11,11 @@ You can see live preview here: [Weather Forecast App](https://ssg-weather-app.ne
 * Projects name is Weather Forecast App, hence I have used 'WF' prefix for the custom components that I've created.
 * In custom components style section, there is a wrapper div and an id given to this div as wrapper css. I use this method for overwriting Vuetify classes without scoping.
 
+## Future Development Ideas
+* An AI face detection plugin could be implemented to detect user faces while taking selfies inside app.
+* App is only showing weather degrees right now, API has a lot of different data (humidity, wind etc.). These datas can be shown in a detailed view.
+* Style optimizations can be made and dark mode could be added
+
 ## Prerequisites
 You will need [Node.js](https://nodejs.org) version 6.0 or greater installed on your system.
 
