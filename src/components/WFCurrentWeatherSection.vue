@@ -34,6 +34,7 @@ export default {
           <v-img
             :src="imgURL"
           />
+          <!-- TODO image style update avatar component maybe ? -->
             <!-- height="100%" -->
         </v-flex>
 
