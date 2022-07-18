@@ -71,6 +71,8 @@ You can see live preview here: [Weather Forecast App](https://ssg-weather-app.ne
 ## Future Development Ideas
 * An AI face detection plugin could be implemented to detect user faces while taking selfies inside app.
 * App is only showing weather degrees right now, API has a lot of different data (humidity, wind etc.). These datas can be shown in a detailed view.
+* Components can be dissectable to more smaller pieces for better maintaining.
+* A common component library can be created for reusable small components such as loading, custom inputs, weather table cells etc.
 * Style optimizations can be made and dark mode could be added
 
 ## Prerequisites
