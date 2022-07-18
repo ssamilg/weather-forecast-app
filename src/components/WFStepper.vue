@@ -88,6 +88,7 @@ export default {
             v-show="!isLoading"
             @setForm="getForm"
             @showWarning="showSnackbar($event.type, $event.text)"
+            @showError="showSnackbar($event.type, $event.text)"
           />
 
           <v-layout
