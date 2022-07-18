@@ -1,10 +1,11 @@
 <script>
+import WFWeeklyWeatherSection from './WFWeeklyWeatherSection.vue';
 import WFTodaysWeatherSection from './WFTodaysWeatherSection.vue';
 import WFCurrentWeatherSection from './WFCurrentWeatherSection.vue';
 
 export default {
   name: 'WFForecastTable',
-  components: { WFTodaysWeatherSection, WFCurrentWeatherSection },
+  components: { WFTodaysWeatherSection, WFCurrentWeatherSection, WFWeeklyWeatherSection },
   props: {
     forecastData: {
       type: Object,
@@ -72,44 +73,10 @@ export default {
               :todays-forecast="todaysForecastData"
             />
 
-            <v-layout align-center mt-4>
-              <v-flex shrink class="text-truncate font-weight-bold">
-                5 Days Forecast Report
-              </v-flex>
-            </v-layout>
-
-            <v-layout>
-              <v-flex
-                v-for="hour in ['day', '00', '03', '06', '09', '12', '15', '18', '21']"
-                :key="hour"
-              >
-                {{ hour }}
-              </v-flex>
-            </v-layout>
-
-            <v-layout
-              v-for="(day, index) in days"
-              :key="index"
-              style="text-align:left"
-            >
-              <v-flex xs2>
-                {{ new Date(day).toString().slice(0, 3) }}
-              </v-flex>
-
-              <template v-for="weatherForDay in processedForecastData[day]">
-        <!-- v-if="`${day} ${weather.dt_txt.slice(-8)}` === weatherForDay.dt_txt" -->
-        <!-- {{ new Date(weatherForDay.dt_txt).toString().slice(0, 21).replace('2022', '') }} -->
-                <v-flex
-                  :key="weatherForDay.dt_txt"
-                  pa-1
-                  xs2
-                >
-                  {{  Math.floor(weatherForDay.main.temp) }}°
-                </v-flex>
-              </template>
-
-              <v-spacer/>
-            </v-layout>
+            <wF-weekly-weather-section
+              :processed-forecast-data="processedForecastData"
+              :forecast-days="days"
+            />
           </v-flex>
         </v-layout>
       </template>
