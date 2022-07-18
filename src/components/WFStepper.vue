@@ -100,7 +100,7 @@ export default {
 
 <style lang="scss">
 #wf-stepper {
-  height: 80vh;
+  height: 90vh;
 
   .v-stepper {
     height: 100%;
