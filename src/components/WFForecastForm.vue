@@ -52,7 +52,7 @@ export default {
     </v-layout>
 
     <v-layout justify-end>
-      <v-btn depressed color="primary" @click="setUserData()">
+      <v-btn id="submit-btn" depressed color="primary" @click="setUserData()">
         Next
         <v-icon class="ml-2">mdi-chevron-right</v-icon>
       </v-btn>
