@@ -74,6 +74,7 @@ export default {
             />
 
             <wF-weekly-weather-section
+              v-if="processedForecastData"
               :processed-forecast-data="processedForecastData"
               :forecast-days="days"
             />
