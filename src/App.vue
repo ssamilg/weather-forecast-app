@@ -14,7 +14,10 @@ export default {
 </template>
 
 <style lang="scss">
-// TODO change the project font family
+* {
+  font-family: 'Lato', sans-serif;
+}
+
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;

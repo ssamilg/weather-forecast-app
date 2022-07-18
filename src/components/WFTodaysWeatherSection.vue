@@ -26,7 +26,7 @@ export default {
 <template>
   <div id="wF-todays-weather-section">
     <v-layout align-center mt-4>
-      <v-flex shrink class="text-truncate date-label">
+      <v-flex shrink class="text-truncate font-weight-bold date-label">
         {{ currentWeather.today.slice(0, 15) }}
       </v-flex>
     </v-layout>
@@ -45,7 +45,7 @@ export default {
           </v-flex>
         </v-layout>
 
-        <v-layout justify-center class="todays-weather-icons">
+        <v-layout justify-center>
           <v-flex shrink>
             <v-img
               :src="`http://openweathermap.org/img/wn/${todaysWeather.weather[0].icon}@2x.png`"
@@ -82,23 +82,10 @@ export default {
 
     .todays-weather {
       text-align: center;
-      border: 1px solid rgba($color: #000000, $alpha: 0);
-
-      &:hover {
-        border: 1px solid #e0e0e0;
-        cursor: default;
-      }
-
-      &-hours {
-      }
 
       &-temperature {
         font-weight: 300;
         font-size: 1rem;
-      }
-
-      &-icons {
-        // background-color: #80CBC4
       }
     }
   }

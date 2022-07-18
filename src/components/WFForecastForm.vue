@@ -30,7 +30,14 @@ export default {
 
 <template>
   <div id="wf-forecast-form">
-    <v-layout>
+    <v-layout justify-center>
+      <v-flex md10 class="welcome-message">
+        <h3>Welcome to Weather Forecast App.</h3>
+        Please type your name and city that you want to get weather forecast report.
+      </v-flex>
+    </v-layout>
+
+    <v-layout mt-4>
       <v-text-field
         v-model="formData.name"
         label="Name"
@@ -56,5 +63,9 @@ export default {
 <style lang="scss">
 #wf-forecast-form {
   height: 100%;
+
+  .welcome-message {
+    text-align: center;
+  }
 }
 </style>

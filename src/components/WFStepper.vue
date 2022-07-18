@@ -46,6 +46,9 @@ export default {
         })
         .catch((err) => {
           this.showSnackbar('error', err.message);
+        })
+        .finally(() => {
+          this.isLoading = false;
         });
     },
     showSnackbar(type, text = null) {
@@ -82,13 +85,13 @@ export default {
       <v-stepper-items>
         <v-stepper-content step="1">
           <wF-forecast-form
-            v-if="!isLoading"
+            v-show="!isLoading"
             @setForm="getForm"
             @showWarning="showSnackbar($event.type, $event.text)"
           />
 
           <v-layout
-            v-else-if="isLoading"
+            v-show="isLoading"
             align-center justify-center fill-height
           >
             <v-flex shrink>
