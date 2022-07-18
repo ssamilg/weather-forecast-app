@@ -1,6 +1,8 @@
-# weather-forecast-app
+Weather Forecast App
 === 
+
 Weather Forecast App is a user interface for city based weather reports created with [Vue.js](https://v2.vuejs.org/) and openweathermap.org api.
+
 [Vuetify](https://vuetifyjs.com/) used as component library while creating the ui.
 
 You can see live preview here: [Weather Forecast App](https://ssg-weather-app.netlify.app/)
