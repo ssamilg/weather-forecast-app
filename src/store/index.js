@@ -30,6 +30,12 @@ export default new Vuex.Store({
     fetchCityWeather(_, cityData) {
       return axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=${cityData.lat}&lon=${cityData.lon}&units=metric&appid=${process.env.VUE_APP_API_ID}`);
     },
+    fetchCountries() {
+      return axios.get('https://countriesnow.space/api/v0.1/countries/codes');
+    },
+    fetchCitiesByCountry(_, country) {
+      return axios.post('https://countriesnow.space/api/v0.1/countries/cities', { country });
+    },
     setUserName({ commit }, value) {
       commit('setUserName', value);
     },

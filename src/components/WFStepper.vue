@@ -26,10 +26,8 @@ export default {
 
       this.fetchCityInfoByName(form.city)
         .then((res) => {
-          console.log({ res });
           const [cityData] = res.data;
 
-          // Loading and error handling should be added
           this.fetchCityWeather(cityData)
             .then((forecast) => {
               this.forecastData = forecast.data;
@@ -64,7 +62,6 @@ export default {
   <div id="wf-stepper">
     <v-stepper v-model="currentStep">
       <v-stepper-header>
-        <!-- TODO Remove steps and add logolike text here also shrink the height -->
         <v-stepper-step
           :complete="currentStep > 1"
           step="1"
@@ -88,6 +85,7 @@ export default {
             v-show="!isLoading"
             @setForm="getForm"
             @showWarning="showSnackbar($event.type, $event.text)"
+            @showError="showSnackbar($event.type, $event.text)"
           />
 
           <v-layout

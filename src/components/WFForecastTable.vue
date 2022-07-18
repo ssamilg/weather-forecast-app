@@ -21,8 +21,6 @@ export default {
     };
   },
   mounted() {
-    console.log('forecastData', this.forecastData);
-
     [this.weather] = this.forecastData.list;
     this.weather.today = new Date(this.weather.dt_txt).toString().slice(0, 21);
 
@@ -45,9 +43,6 @@ export default {
       this.days.forEach((date) => {
         processedData[date] = this.filterForecastByDate(date);
       });
-
-      console.log(this.days);
-      console.log(processedData);
 
       return processedData;
     },

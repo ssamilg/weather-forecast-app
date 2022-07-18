@@ -24,7 +24,6 @@ export default {
   },
   methods: {
     ...mapActions(['setImgURL']),
-    // add loading here as well
     startCapture() {
       navigator.mediaDevices.getUserMedia({ video: true, audio: false })
         .then((stream) => {
