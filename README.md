@@ -45,3 +45,8 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+## Theoretical Questions
+
+### Q:How would you take what is built here and turn it into an app for mobile?
+A: I would choose React-Native for mobile version of this application. Basic js methods will remain same and user interface can recreate with react for mobile platforms. While designing the ui, I have tried to follow a mobile first approach. Interface has seperate components and more flexible and maintainable structure. It would be possible to implement these seperate ui components to React Native and use logic part mostly same with original vue application.
