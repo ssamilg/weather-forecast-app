@@ -12,7 +12,29 @@ You can see live preview here: [Weather Forecast App](https://ssg-weather-app.ne
 * In custom components style section, there is a wrapper div and an id given to this div as wrapper css. I use this method for overwriting Vuetify classes without scoping.
 
 ## Components
-* WFCurrentWeatherSection
+* **WFStepper**
+
+    Main stepper component contains three basic components of the application.(WFForecastForm, WFForecastForm, WFForecastForm).
+
+* **WFForecastForm**
+
+    Simple form component that contains name and city fields expected from user.
+
+* **WFSelfieStep**
+
+    User can take photos until he choose to continue with one of them.
+
+* **WFForecastTable**
+
+    UI section that contains current, todays and weekly forecast components.
+
+    Props
+
+    | Name           | Type  | Description |
+    |----------------|-------|-------------|
+    | forecastData   |Object | The raw forecast data fetched from api|
+
+* **WFCurrentWeatherSection**
 
     UI section that shows current time's weather data.
 
@@ -22,6 +44,28 @@ You can see live preview here: [Weather Forecast App](https://ssg-weather-app.ne
     |----------------|-------|-------------|
     | currentWeather |Object | First item of the weather data fetched from the api. Indicates weather report closest to current time|
     | forecastData   |Object | Processed and grouped version of api's forecast data|
+
+* **WFTodaysWeatherSection**
+
+    UI section that shows today's weather data with 3 hours of intervals.
+
+    Props
+
+    | Name           | Type  | Description |
+    |----------------|-------|-------------|
+    | currentWeather |Object | First item of the weather data fetched from the api. Indicates weather report closest to current time|
+    | todaysForecast |Array  | The array that contains all weather data for the day with 3 hours of intervals |
+
+* **WFWeeklyWeatherSection**
+
+    UI section that shows today's weather data with 3 hours of intervals.
+
+    Props
+
+    | Name           | Type  | Description |
+    |----------------|-------|-------------|
+    | processedForecastData |Object | Processed and grouped version of api's forecast data|
+    | forecastDays |Array  | The array that contains all dates for the fetched forecast data|
 
 
 ## Future Development Ideas
