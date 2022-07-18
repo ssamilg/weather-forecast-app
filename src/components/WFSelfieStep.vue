@@ -81,7 +81,7 @@ export default {
     <canvas ref="canvasRef" style="display:none"/>
 
     <v-layout justify-center align-center wrap>
-      <v-btn v-if="isPhotoModeOn" depressed color="primary" @click="takePicture()">
+      <v-btn v-if="isPhotoModeOn" depressed color="primary" class="mt-2" @click="takePicture()">
         <v-icon class="mr-2">mdi-camera</v-icon>
         Take Photo
       </v-btn>
@@ -109,6 +109,15 @@ export default {
           </v-layout>
         </v-flex>
       </template>
+    </v-layout>
+
+    <v-layout justify-center mt-2>
+      <v-flex shrink>
+        <v-btn outlined color="grey" @click="$emit('prev-step')">
+          <v-icon class="mr-2">mdi-chevron-left</v-icon>
+          Back
+        </v-btn>
+      </v-flex>
     </v-layout>
   </div>
 </template>

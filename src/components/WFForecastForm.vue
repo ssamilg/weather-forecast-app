@@ -16,7 +16,7 @@ export default {
     setUserData() {
       this.setUserName(this.formData.name);
       this.setUserCity(this.formData.city);
-
+      // Fields should be filled here before continue
       this.$emit('setForm', this.formData);
     },
   },
@@ -40,8 +40,9 @@ export default {
     </v-layout>
 
     <v-layout justify-end>
-      <v-btn @click="setUserData()">
+      <v-btn depressed color="primary" @click="setUserData()">
         Next
+        <v-icon class="ml-2">mdi-chevron-right</v-icon>
       </v-btn>
     </v-layout>
   </div>

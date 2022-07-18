@@ -25,6 +25,7 @@ export default {
           console.log({ res });
           const [cityData] = res.data;
 
+          // Loading and error handling should be added
           this.fetchCityWeather(cityData)
             .then((forecast) => {
               this.forecastData = forecast.data;
@@ -66,34 +67,34 @@ export default {
         </v-stepper-content>
 
         <v-stepper-content step="2">
-          <v-card
-            class="mb-12"
-            height="100%"
-          >
-            <wF-selfie-step @next-step="currentStep=3"/>
-          </v-card>
+          <wF-selfie-step
+            @next-step="currentStep=3"
+            @prev-step="currentStep=1"
+          />
         </v-stepper-content>
 
         <v-stepper-content step="3">
           <wF-forecast-table
             v-if="forecastData && currentStep === 3"
             :forecast-data="forecastData"
+            class="forecast-table-wrapper"
           />
+
+          <v-layout class="forecast-table-actions" justify-end align-center>
+            <v-btn outlined color="grey" class="mr-2" @click="currentStep=2">
+              <v-icon class="mr-2">mdi-chevron-left</v-icon>
+              Back
+            </v-btn>
+
+            <v-btn depressed color="primary" @click="currentStep = 1">
+              <v-icon class="mr-2">mdi-restart</v-icon>
+              Restart
+            </v-btn>
+          </v-layout>
         </v-stepper-content>
+
       </v-stepper-items>
 
-      <v-layout class="wf-stepper-actions pa-2">
-        <v-btn
-          color="primary"
-          @click="currentStep += 1"
-        >
-          Continue
-        </v-btn>
-
-        <v-btn text @click="currentStep = 1">
-          Cancel
-        </v-btn>
-      </v-layout>
     </v-stepper>
   </div>
 </template>
@@ -106,13 +107,13 @@ export default {
     height: 100%;
 
     .v-stepper__header {
-      height: 12%;
+      height: 10%;
       box-shadow: none;
       border-bottom: 1px solid #e0e0e0;
     }
 
     .v-stepper__items {
-      height: 76%;
+      height: 90%;
 
       .v-stepper__content {
         height: 100%;
@@ -124,8 +125,13 @@ export default {
     }
   }
 
-  &-actions {
-    height: 12%;
+  .forecast-table-wrapper {
+    height: 90%;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  .forecast-table-actions {
+    height: 10%;
   }
 }
 </style>
