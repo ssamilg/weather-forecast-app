@@ -114,11 +114,3 @@ npm run lint
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
-## Theoretical Questions
-
-### Q:How would you take what is built here and turn it into an app for mobile?
-A: I would choose React-Native for mobile version of this application. Basic js methods will remain same and user interface can recreate with react for mobile platforms. While designing the ui, I have tried to follow a mobile first approach. Interface has seperate components and more flexible and maintainable structure. It would be possible to implement these seperate ui components to React Native and use logic part mostly same with original vue application.
-
-### Q:How would you turn this into a module where the code is obfuscated?
-A: Firstly, I would rewrite entry point of the app accordingly to a module. Then I would have to do necessary configurations on package.json to build app as a library.
-I would use a code obfuscator library for obfuscation such as [webpack-obfuscator](https://www.npmjs.com/package/webpack-obfuscator).
